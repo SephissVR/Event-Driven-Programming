@@ -1,0 +1,74 @@
+<!-- Anastasia Casagrande
+    Date: 10/26/24
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Mover</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: purple;
+            font-family: Arial, sans-serif;
+        }
+        #memeImage {
+            position: top;
+            width: 150px; /* Adjust the size of the meme */
+            transition: transform 0.1s; /* Smooth movement */
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <img id="memeImage" src="olli-the-polite-cat.jpg" alt="Meme" />
+    <div>
+        <button id="startButton" onclick="startMovement()">Start</button>
+        <button id="stopButton" onclick="stopMovement()" disabled>Stop</button>
+    </div>
+
+    <script>
+        // Variables to control movement and animation
+        let interval;
+        let posX = 0; // Initial X position
+        let posY = 0; // Initial Y position
+        const memeImage = document.getElementById('memeImage');
+
+        // Function to start moving the meme image
+        function startMovement() {
+            // Disable the Start button and enable the Stop button
+            document.getElementById('startButton').disabled = true;
+            document.getElementById('stopButton').disabled = false;
+
+            // Start the movement by setting an interval
+            interval = setInterval(() => {
+                // Randomly change the position of the image
+                posX = Math.random() * (window.innerWidth - 150); // Random X position
+                posY = Math.random() * (window.innerHeight - 150); // Random Y position
+                memeImage.style.transform = `translate(${posX}px, ${posY}px)`; // Move the image
+            }, 10); // Update every 10 milliseconds
+        }
+
+        // Function to stop moving the meme image
+        function stopMovement() {
+            // Disable the Stop button and enable the Start button
+            document.getElementById('stopButton').disabled = true;
+            document.getElementById('startButton').disabled = false;
+
+            // Clear the interval to stop movement
+            clearInterval(interval);
+        }
+    </script>
+</body>
+</html>
